@@ -9,9 +9,9 @@ module.exports = {
 
 
   /**
-   * `SocketController.getRoomSubscribers()`
+   * `SocketController.subscribers()`
    */
-  getRoomSubscribers: function (req, res) {
+  subscribers: function (req, res) {
     if (!req.param('room')) return res.badRequest('No `room` specified- please specify the name of the room whose subscribers you want to look up.');
     var subscribers = sails.sockets.subscribers(room);
     return res.ok(require('util').format(
@@ -32,9 +32,9 @@ module.exports = {
 
 
   /**
-   * `SocketController.getSocketRooms()`
+   * `SocketController.socketRooms()`
    */
-  getSocketRooms: function (req, res) {
+  socketRooms: function (req, res) {
     var rooms = sails.sockets.socketRooms(req.socket);
     return res.ok(require('util').format(
       'My socket is currently subscribed to %d rooms: ',
@@ -87,9 +87,9 @@ module.exports = {
 
 
   /**
-   * `SocketController.emitTo()`
+   * `SocketController.emit()`
    */
-  emitTo: function (req, res) {
+  emit: function (req, res) {
     if (!req.param('socketId')) return res.badRequest('No `socketId` specified- please specify the id of the socket you want to emit this data to.');
     if (!req.param('data')) return res.badRequest('No `data` specified- please specify data to send.');
     sails.sockets.emit(req.param('socketId'), req.param('data'));

@@ -21,6 +21,13 @@ module.exports.policies = {
   '*': true,
 
   // Ensure that request originated from a socket before running
-  // any of SocketController's actions:
-  SocketController: { '*': 'isSocket' }
+  // any of SocketController's actions that rely on `req` originating
+  // from a request socket:
+  SocketController: {
+    'id': 'isSocket',
+    'join': 'isSocket',
+    'leave': 'isSocket',
+    'broadcast': 'isSocket',
+    'socketRooms': 'isSocket'
+  }
 };
